@@ -1,9 +1,7 @@
-# Musicapp
+# MusicApp
 
-A new Flutter project.
 
 ## Getting Started
-
 <h1>Light Theme</h1>
 <div style="display: flex; justify-content: space-evenly;">
 <img src="https://github.com/MohammedRostom/MusicApp_Audio-Access_Storage/blob/main/lib/screenShots/List%20Of%20Music%20Light.jpg"  width="250" height="550"/>
