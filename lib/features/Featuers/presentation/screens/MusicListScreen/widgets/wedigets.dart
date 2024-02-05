@@ -22,7 +22,7 @@ Widget Body(BuildContext context) {
                 clipBehavior: Clip.antiAlias,
                 width: double.infinity,
                 child: Image.asset(
-                  "lib/Assets/herosection.png",
+                  "${Constans.herosection}",
                   fit: BoxFit.fill,
                 ),
                 height: 250,

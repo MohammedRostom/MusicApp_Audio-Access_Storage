@@ -6,4 +6,10 @@ class Constans {
   ];
 
   static final fontName = "MyFont";
+
+  static final herosection = "lib/Assets/herosection.png";
+  static final backGround = "lib/Assets/backGround.png";
+  static final backGround2 = "lib/Assets/backGround2.png";
+  static final HeroSectionOneSongPhoto =
+      "lib/Assets/HeroSectionOneSongPhoto.png";
 }
