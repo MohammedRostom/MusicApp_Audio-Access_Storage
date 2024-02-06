@@ -29,7 +29,9 @@ class MyApp extends StatelessWidget {
         },
         builder: (context, state) {
           return MaterialApp(
-            locale: Locale(Constans.LangugeEn),
+            locale: Locale(Controller(context).isAarbicSelected
+                ? Constans.LangugeAr
+                : Constans.LangugeEn),
             localizationsDelegates: [
               S.delegate,
               GlobalMaterialLocalizations.delegate,

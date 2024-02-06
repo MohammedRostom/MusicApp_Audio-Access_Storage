@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:musicapp/core/components/Re_useble.dart';
 import 'package:musicapp/core/utils/Colors.dart';
 import 'package:on_audio_query/on_audio_query.dart';
@@ -159,10 +160,7 @@ class RecentItem extends StatelessWidget {
 AppBar CutemAppBar(BuildContext context) {
   return AppBar(
     systemOverlayStyle: Theme.of(context).appBarTheme.systemOverlayStyle,
-    leading: Icon(
-      Icons.sort_sharp,
-      color: Theme.of(context).appBarTheme.iconTheme?.color,
-    ),
+    leading: menu(),
     titleTextStyle: Theme.of(context).appBarTheme!.titleTextStyle,
     title: Padding(
         padding: const EdgeInsets.all(8),
@@ -184,6 +182,36 @@ AppBar CutemAppBar(BuildContext context) {
       IconButton(onPressed: () {}, icon: Icon(Icons.search_rounded)),
     ],
   );
+}
+
+class menu extends StatelessWidget {
+  const menu({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return PopupMenuButton(
+      color: Theme.of(context).colorScheme.primaryContainer.withOpacity(1),
+      onSelected: (value) {
+        Controller(context).isValueArabic(value);
+      },
+      itemBuilder: (context) => [
+        PopupMenuItem(
+          value: '${Constans.LangugeEn}',
+          child: Center(child: Text('EN')),
+        ),
+        PopupMenuItem(
+          value: '${Constans.LangugeAr}',
+          child: Center(child: Text('AR')),
+        ),
+      ],
+      child: Icon(
+        Icons.sort_sharp,
+        color: Theme.of(context).appBarTheme.iconTheme?.color,
+      ),
+    );
+  }
 }
 
 class SongBody extends StatelessWidget {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:musicapp/core/utils/Constant.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:intl/intl.dart';
@@ -127,4 +128,14 @@ class AccessStorgeCubitCubit extends Cubit<AccessStorgeCubitState> {
   }
 
   isArapic() => Intl.getCurrentLocale() == "ar";
+
+  bool isAarbicSelected = false;
+
+  isValueArabic(value) {
+    print(value);
+    value == Constans.LangugeAr
+        ? isAarbicSelected = true
+        : isAarbicSelected = false;
+    emit(AnyAction());
+  }
 }
