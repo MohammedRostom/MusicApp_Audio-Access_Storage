@@ -3,12 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:intl/intl.dart';
 part 'access_storge_cubit_state.dart';
 
 class AccessStorgeCubitCubit extends Cubit<AccessStorgeCubitState> {
   AccessStorgeCubitCubit() : super(AccessStorgeCubitInitial());
   static AccessStorgeCubitCubit get(context) => BlocProvider.of(context);
-
   bool ChangeTheme = true;
   void ChangeThemeMethods() {
     ChangeTheme = !ChangeTheme;
@@ -69,7 +69,7 @@ class AccessStorgeCubitCubit extends Cubit<AccessStorgeCubitState> {
     CurruntOndexSongPLay = newIndex;
     Recentsongs.insert(0, song);
     CurruntOndexSongPLay = newIndex;
-    // await audioPlayer.play();
+    await audioPlayer.play();
     emit(AnyAction());
   }
 
@@ -95,7 +95,6 @@ class AccessStorgeCubitCubit extends Cubit<AccessStorgeCubitState> {
 
   void reSong(SongModel song, context, index) async {
     index = CurruntOndexSongPLay;
-    Updateduration();
     PLay = false;
     isPlay = PLay;
     isPlay = true;
@@ -113,20 +112,6 @@ class AccessStorgeCubitCubit extends Cubit<AccessStorgeCubitState> {
     return formattedDuration;
   }
 
-  var Curauntduration = "";
-  var Posationtduration = "";
-
-  Updateduration() {
-    audioPlayer.durationStream.listen((curaunt) {
-      Curauntduration = curaunt.toString().split(":")[0];
-      emit(AnyAction());
-    });
-    audioPlayer.positionStream.listen((postion) {
-      Posationtduration = postion.toString().split(":")[0];
-      emit(AnyAction());
-    });
-  }
-
   moveToAnotherItem(index, context, song, bool Next) {
     if (Next) {
       index++;
@@ -141,8 +126,5 @@ class AccessStorgeCubitCubit extends Cubit<AccessStorgeCubitState> {
     }
   }
 
-  double slider_value = 0.0;
-  void slider() {
-    slider_value = 0.6;
-  }
+  isArapic() => Intl.getCurrentLocale() == "ar";
 }

@@ -1,56 +1,70 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
+import '../../../../../../core/Methods/Methods.dart';
 import '../../../../../../core/utils/Colors.dart';
 import '../../../../../../core/utils/Constant.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../../Cubits/Access_storge_cubit_cubit/access_storge_cubit_cubit.dart';
 import '../methods/Play_song_methods.dart';
 
-Widget BodyofSinglePlaySong(
-  BuildContext context,
-) {
-  return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 28),
-    child: BlocConsumer<AccessStorgeCubitCubit, AccessStorgeCubitState>(
-      listener: (context, state) {
-        // TODO: implement listener
-      },
-      builder: (context, state) {
-        return Container(
-          width: MediaQuery.of(context).size.width,
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-            SizedBox(
-              height: 470,
-            ),
-            SecoundSection(),
-            SizedBox(
-              height: 15,
-            ),
-            ThreeSection(),
-            SizedBox(
-              height: 25,
-            ),
-            FourSection(),
-            Spacer(),
-            FiveSection()
-          ]),
-        );
-      },
-    ),
-  );
+class BodyofSinglePlaySong extends StatelessWidget {
+  const BodyofSinglePlaySong({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 28),
+      child: BlocConsumer<AccessStorgeCubitCubit, AccessStorgeCubitState>(
+        listener: (context, state) {
+          // TODO: implement listener
+        },
+        builder: (context, state) {
+          return Container(
+            width: MediaQuery.of(context).size.width,
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: 470,
+                  ),
+                  SecoundSection(),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  ThreeSection(),
+                  SizedBox(
+                    height: 25,
+                  ),
+                  FourSection(),
+                  Spacer(),
+                  FiveSection()
+                ]),
+          );
+        },
+      ),
+    );
+  }
 }
 
-Widget musicPatternBackground(context) {
-  return Opacity(
-    opacity: AccessStorgeCubitCubit.get(context).ChangeTheme ? 0.05 : 0.08,
-    child: Image(
-        fit: BoxFit.fill,
-        width: double.infinity,
-        height: 800,
-        image: AssetImage("${Constans.backGround2}")),
-  );
+class musicPatternBackground extends StatelessWidget {
+  const musicPatternBackground({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Opacity(
+      opacity: AccessStorgeCubitCubit.get(context).ChangeTheme ? 0.05 : 0.08,
+      child: Image(
+          fit: BoxFit.fill,
+          width: double.infinity,
+          height: 800,
+          image: AssetImage("${Constans.backGround2}")),
+    );
+  }
 }
 
 class FiveSection extends StatelessWidget {
@@ -124,7 +138,7 @@ class FiveSection extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('     Playlist',
+                      Text('     ${S.of(context).Playlist}',
                           style: Theme.of(context).textTheme.labelMedium),
                       Icon(Icons.playlist_play)
                     ],
@@ -191,7 +205,7 @@ class SecoundSection extends StatelessWidget {
               color: Theme.of(context).iconTheme.color,
             ),
             Text(
-              "Share",
+              "${S.of(context).Share}",
               style: Theme.of(context).textTheme.titleSmall,
             )
           ],
@@ -216,7 +230,8 @@ class SecoundSection extends StatelessWidget {
               Icons.keyboard_control,
               size: Theme.of(context).iconTheme.size,
             ),
-            Text("Menu", style: Theme.of(context).textTheme.titleSmall)
+            Text("${S.of(context).Menu}",
+                style: Theme.of(context).textTheme.titleSmall)
           ],
         ),
       ],
@@ -257,7 +272,7 @@ class ThreeSection extends StatelessWidget {
               width: 8,
             ),
             Text(
-              "${AccessStorgeCubitCubit.get(context).formatDuration(Play_song_methods().CurruntSong(context).duration!)}",
+              "${Controller(context).formatDuration(Play_song_methods().CurruntSong(context).duration!)}",
               style: Theme.of(context).textTheme.titleSmall,
               // "${AccessStorgeCubitCubit.get(context).Posationtduration}",
             ),
@@ -275,77 +290,88 @@ class FourSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Container(
-          width: 90,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                width: 35,
-                height: 35,
+    return BlocConsumer<AccessStorgeCubitCubit, AccessStorgeCubitState>(
+      listener: (context, state) {
+        // TODO: implement listener
+      },
+      builder: (context, state) {
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              width: 90,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    width: 35,
+                    height: 35,
+                  ),
+                  InkWell(
+                    onTap: () => Play_song_methods().Pre_PLaySong(context),
+                    child: Icon(
+                      Controller(context).isArapic()
+                          ? Icons.skip_next_rounded
+                          : Icons.skip_previous_rounded,
+                      size: 35,
+                    ),
+                  ),
+                ],
               ),
-              InkWell(
-                onTap: () => Play_song_methods().Pre_PLaySong(context),
-                child: Icon(
-                  Icons.skip_previous_rounded,
-                  size: 35,
-                ),
+            ),
+            SizedBox(
+              width: 8,
+            ),
+            InkWell(
+              onTap: () {
+                Controller(context).isplayNowIsStopNow(
+                    Play_song_methods().CurruntSong(context),
+                    context,
+                    Controller(context).CurruntOndexSongPLay);
+              },
+              child: Icon(
+                Controller(context).PLay
+                    ? Icons.pause
+                    : Icons.play_arrow_rounded,
+                size: 53,
               ),
-            ],
-          ),
-        ),
-        SizedBox(
-          width: 8,
-        ),
-        InkWell(
-          onTap: () {
-            AccessStorgeCubitCubit.get(context).isplayNowIsStopNow(
-                Play_song_methods().CurruntSong(context),
-                context,
-                AccessStorgeCubitCubit.get(context).CurruntOndexSongPLay);
-          },
-          child: Icon(
-            AccessStorgeCubitCubit.get(context).PLay
-                ? Icons.pause
-                : Icons.play_arrow_rounded,
-            size: 53,
-          ),
-        ),
-        SizedBox(
-          width: 8,
-        ),
-        Container(
-          width: 90,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              InkWell(
-                onTap: () => Play_song_methods().next_PLaySong(context),
-                child: Icon(
-                  Icons.skip_next_rounded,
-                  size: 35,
-                ),
+            ),
+            SizedBox(
+              width: 8,
+            ),
+            Container(
+              width: 90,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  InkWell(
+                    onTap: () => Play_song_methods().next_PLaySong(context),
+                    child: Icon(
+                      Controller(context).isArapic()
+                          ? Icons.skip_previous_rounded
+                          : Icons.skip_next_rounded,
+                      size: 35,
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Controller(context).toggeleLoopOneSongOrAll(
+                          Play_song_methods().CurruntSong(context));
+                    },
+                    child: Icon(
+                      Icons.repeat_one_rounded,
+                      size: 30,
+                      color: Controller(context).loopOrNot
+                          ? Theme.of(context).iconTheme.color
+                          : Theme.of(context).iconTheme.color!.withOpacity(0.4),
+                    ),
+                  ),
+                ],
               ),
-              GestureDetector(
-                onTap: () {
-                  AccessStorgeCubitCubit.get(context).toggeleLoopOneSongOrAll(
-                      Play_song_methods().CurruntSong(context));
-                },
-                child: Icon(
-                  Icons.repeat_one_rounded,
-                  size: 30,
-                  color: AccessStorgeCubitCubit.get(context).loopOrNot
-                      ? Theme.of(context).iconTheme.color
-                      : Theme.of(context).iconTheme.color!.withOpacity(0.4),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
+            ),
+          ],
+        );
+      },
     );
   }
 }

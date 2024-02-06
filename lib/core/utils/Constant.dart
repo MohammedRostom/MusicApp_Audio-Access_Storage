@@ -10,6 +10,10 @@ class Constans {
   static final herosection = "lib/Assets/herosection.png";
   static final backGround = "lib/Assets/backGround.png";
   static final backGround2 = "lib/Assets/backGround2.png";
+  static final soundsvg = "lib/Assets/svg/sound.svg";
   static final HeroSectionOneSongPhoto =
       "lib/Assets/HeroSectionOneSongPhoto.png";
+
+  static final LangugeAr = "ar";
+  static final LangugeEn = "en";
 }

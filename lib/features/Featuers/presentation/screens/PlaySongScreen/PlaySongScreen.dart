@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../../core/utils/Constant.dart';
 import 'widgets/widgets.dart';
 
 class PlaySong extends StatelessWidget {
@@ -11,13 +12,11 @@ class PlaySong extends StatelessWidget {
         children: [
           Stack(
             children: [
-              musicPatternBackground(context),
-              Image.asset("lib/Assets/HeroSectionOneSongPhoto.png"),
+              musicPatternBackground(),
+              Image.asset("${Constans.HeroSectionOneSongPhoto}"),
             ],
           ),
-          BodyofSinglePlaySong(
-            context,
-          ),
+          BodyofSinglePlaySong(),
         ],
       ),
     );
